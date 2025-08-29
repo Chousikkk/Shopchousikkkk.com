@@ -3,28 +3,102 @@
 <head>
   <meta charset="UTF-8">
   <title>Shop Acc Game</title>
-  <link rel="stylesheet" href="style.css">
-  <script type="module" src="app.js" defer></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f2f2f2;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    .container {
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      width: 300px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+      text-align: center;
+    }
+    h2 { margin-bottom: 20px; }
+    input {
+      width: 100%;
+      padding: 10px;
+      margin: 8px 0;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+    button {
+      width: 100%;
+      padding: 10px;
+      margin-top: 10px;
+      border: none;
+      border-radius: 5px;
+      background: #007bff;
+      color: white;
+      cursor: pointer;
+    }
+    button:hover { background: #0056b3; }
+  </style>
 </head>
 <body>
-  <h1>Shop Acc Game 🚀</h1>
-
-  <!-- Form đăng ký / đăng nhập -->
-  <div id="auth-section">
-    <h2>Đăng nhập / Đăng ký</h2>
-    <input type="email" id="email" placeholder="Email"><br>
-    <input type="password" id="password" placeholder="Mật khẩu"><br>
-    <button id="signup">Đăng ký</button>
+  <div class="container">
+    <h2>Shop Acc Game</h2>
+    <input type="text" id="email" placeholder="Email">
+    <input type="password" id="password" placeholder="Mật khẩu">
+    <button id="register">Đăng ký</button>
     <button id="login">Đăng nhập</button>
-    <button id="logout" style="display:none">Đăng xuất</button>
   </div>
 
-  <hr>
+  <!-- Firebase Code -->
+  <script type="module">
+    // Import Firebase từ CDN
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+    import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword }
+      from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
 
-  <!-- Danh sách acc -->
-  <div id="shop">
-    <h2>Danh sách acc</h2>
-    <ul id="acc-list"></ul>
-  </div>
+    // 🔥 Config của bạn
+    const firebaseConfig = {
+      apiKey: "AIzaSyDcREGqdPpxcerQczyV9PRJIIp5G284sOk",
+      authDomain: "shopchousikk.firebaseapp.com",
+      projectId: "shopchousikk",
+      storageBucket: "shopchousikk.firebasestorage.app",
+      messagingSenderId: "213300117918",
+      appId: "1:213300117918:web:a4d03384dfa615afc6168f",
+      measurementId: "G-0JMS856ZZM"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+
+    // Lấy input và nút
+    const emailInput = document.getElementById("email");
+    const passwordInput = document.getElementById("password");
+    const btnRegister = document.getElementById("register");
+    const btnLogin = document.getElementById("login");
+
+    // Đăng ký
+    btnRegister.addEventListener("click", () => {
+      createUserWithEmailAndPassword(auth, emailInput.value, passwordInput.value)
+        .then(userCredential => {
+          alert("🎉 Đăng ký thành công!");
+        })
+        .catch(error => {
+          alert("Lỗi: " + error.message);
+        });
+    });
+
+    // Đăng nhập
+    btnLogin.addEventListener("click", () => {
+      signInWithEmailAndPassword(auth, emailInput.value, passwordInput.value)
+        .then(userCredential => {
+          alert("✅ Đăng nhập thành công!");
+        })
+        .catch(error => {
+          alert("Lỗi: " + error.message);
+        });
+    });
+  </script>
 </body>
 </html>
