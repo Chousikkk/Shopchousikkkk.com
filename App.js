@@ -11,7 +11,6 @@ const firebaseConfig = {
   storageBucket: "shopchousikk.firebasestorage.app",
   messagingSenderId: "213300117918",
   appId: "1:213300117918:web:a4d03384dfa615afc6168f"
-  measurementId: "G-0JMS856ZZM"
 };
 
 // Khởi tạo Firebase
