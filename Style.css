@@ -1,0 +1,17 @@
+body {
+  font-family: Arial, sans-serif;
+  background: #f3f4f6;
+  color: #333;
+  text-align: center;
+  padding: 20px;
+}
+input, button {
+  margin: 5px;
+  padding: 8px;
+}
+button {
+  cursor: pointer;
+}
+#shop {
+  margin-top: 20px;
+}
